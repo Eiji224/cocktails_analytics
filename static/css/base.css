@@ -20,3 +20,253 @@ h1 {
 h2 {
   font-weight: 500;
 }
+
+footer {
+    background-color: rgb(51, 0, 0) !important;
+    color: white !important;
+}
+
+:root {
+  /* Основные цвета из палитры */
+  --bs-primary: #073f1c;
+  --bs-primary-rgb: 7, 63, 28;
+
+  --bs-secondary: #36127b;
+  --bs-secondary-rgb: 54, 18, 123;
+
+  --bs-success: #073f1c;
+  --bs-success-rgb: 7, 63, 28;
+
+  --bs-danger: #a90024;
+  --bs-danger-rgb: 169, 0, 36;
+
+  --bs-warning: #7d0254;
+  --bs-warning-rgb: 125, 2, 84;
+
+  --bs-info: #36127b;
+  --bs-info-rgb: 54, 18, 123;
+
+  --bs-light: #f8f9fa;
+  --bs-light-rgb: 248, 249, 250;
+
+  --bs-dark: #330000;
+  --bs-dark-rgb: 51, 0, 0;
+
+  --bs-white: #fff;
+  --bs-white-rgb: 255, 255, 255;
+
+  --bs-gray: #6c757d;
+  --bs-gray-rgb: 108, 117, 125;
+
+  --bs-gray-dark: #330000;
+  --bs-gray-dark-rgb: 51, 0, 0;
+
+  /* Фоны и текст по умолчанию */
+  --bs-body-bg: #ffffff;
+  --bs-body-color: #212529;
+  --bs-body-color-rgb: 33, 37, 41;
+
+  /* Текстовые цвета */
+  --bs-body-emphasis-color: #000;
+  --bs-body-emphasis-color-rgb: 0, 0, 0;
+
+  /* Ссылки */
+  --bs-link-color: #073f1c;
+  --bs-link-color-rgb: 7, 63, 28;
+  --bs-link-hover-color: #052a14;
+  --bs-link-hover-color-rgb: 5, 42, 20;
+
+  /* Границы */
+  --bs-border-color: #dee2e6;
+  --bs-border-color-translucent: rgba(0, 0, 0, 0.175);
+}
+
+/* Современные стили для всех кнопок */
+.btn,
+button.btn,
+[class*="btn-"] {
+  border-radius: 0.5rem;
+  padding: 0.625rem 1.5rem;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-width: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:hover,
+button.btn:hover,
+[class*="btn-"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn:active,
+button.btn:active,
+[class*="btn-"]:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Обычные кнопки (filled) */
+.btn-primary,
+.btn-success,
+.btn-danger,
+.btn-warning,
+.btn-info,
+.btn-secondary,
+.btn-dark {
+  border: none;
+  color: #fff;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #073f1c 0%, #0a5a2a 100%);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #0a5a2a 0%, #073f1c 100%);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, #36127b 0%, #4a1a9e 100%);
+}
+
+.btn-secondary:hover {
+  background: linear-gradient(135deg, #4a1a9e 0%, #36127b 100%);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #073f1c 0%, #0a5a2a 100%);
+}
+
+.btn-success:hover {
+  background: linear-gradient(135deg, #0a5a2a 0%, #073f1c 100%);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #a90024 0%, #d1002e 100%);
+}
+
+.btn-danger:hover {
+  background: linear-gradient(135deg, #d1002e 0%, #a90024 100%);
+}
+
+.btn-warning {
+  background: linear-gradient(135deg, #7d0254 0%, #a0036f 100%);
+  color: #fff;
+}
+
+.btn-warning:hover {
+  background: linear-gradient(135deg, #a0036f 0%, #7d0254 100%);
+}
+
+.btn-info {
+  background: linear-gradient(135deg, #36127b 0%, #4a1a9e 100%);
+}
+
+.btn-info:hover {
+  background: linear-gradient(135deg, #4a1a9e 0%, #36127b 100%);
+}
+
+.btn-dark {
+  background: linear-gradient(135deg, #330000 0%, #4d0000 100%);
+}
+
+.btn-dark:hover {
+  background: linear-gradient(135deg, #4d0000 0%, #330000 100%);
+}
+
+/* Outline кнопки с прозрачным фоном */
+.btn-outline-primary {
+  color: #073f1c;
+  border-color: #073f1c;
+  background: transparent;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+  color: #fff;
+  background: #073f1c;
+  border-color: #073f1c;
+}
+
+.btn-outline-secondary {
+  color: #36127b;
+  border-color: #36127b;
+  background: transparent;
+}
+
+.btn-outline-secondary:hover,
+.btn-outline-secondary:focus {
+  color: #fff;
+  background: #36127b;
+  border-color: #36127b;
+}
+
+.btn-outline-success {
+  color: #073f1c;
+  border-color: #073f1c;
+  background: transparent;
+}
+
+.btn-outline-success:hover,
+.btn-outline-success:focus {
+  color: #fff;
+  background: #073f1c;
+  border-color: #073f1c;
+}
+
+.btn-outline-danger {
+  color: #a90024;
+  border-color: #a90024;
+  background: transparent;
+}
+
+.btn-outline-danger:hover,
+.btn-outline-danger:focus {
+  color: #fff;
+  background: #a90024;
+  border-color: #a90024;
+}
+
+.btn-outline-warning {
+  color: #7d0254;
+  border-color: #7d0254;
+  background: transparent;
+}
+
+.btn-outline-warning:hover,
+.btn-outline-warning:focus {
+  color: #fff;
+  background: #7d0254;
+  border-color: #7d0254;
+}
+
+.btn-outline-info {
+  color: #36127b;
+  border-color: #36127b;
+  background: transparent;
+}
+
+.btn-outline-info:hover,
+.btn-outline-info:focus {
+  color: #fff;
+  background: #36127b;
+  border-color: #36127b;
+}
+
+.btn-outline-dark {
+  color: #330000;
+  border-color: #330000;
+  background: transparent;
+}
+
+.btn-outline-dark:hover,
+.btn-outline-dark:focus {
+  color: #fff;
+  background: #330000;
+  border-color: #330000;
+}

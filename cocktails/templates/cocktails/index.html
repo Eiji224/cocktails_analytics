@@ -1,0 +1,46 @@
+{% extends 'cocktails/base.html' %}
+{% load static %}
+
+{% block title %}Cocktails - Main page{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+{% block navbar %}
+    <nav class="navbar navbar-expand-lg custom-nav">
+      <div class="container-fluid d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center">
+              <a class="navbar-brand text-white" href="{% url 'index' %}">
+                <img src="{% static 'images/icon.svg' %}" alt="Logo" class="me-2" style="height: 1.5rem; width: auto; filter: invert(1);">
+                Cocktails
+              </a>
+          </div>
+          <div class="d-flex align-items-center">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Переключатель навигации">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse align-items-end" id="navbarNavAltMarkup">
+                  <div class="navbar-nav">
+                      <a class="nav-link text-white-50" href="#">Sign in</a>
+                      <a class="nav-link text-white active" aria-current="page" href="#">Log in</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex flex-column justify-content-center align-items-center vh-100">
+        <div style="background-color: rgba(51, 0, 0, 0.8);" class="rounded-4 p-3">
+            <div class="text-center">
+                <h1>Discover cocktails and their ingredients</h1>
+                <h2>Explore recipes, alcohol levels and popularity</h2>
+            </div>
+            <div class="d-flex gap-3 justify-content-center mt-4">
+                <button class="btn btn-outline-primary">Browse cocktails</button>
+                <button class="btn btn-outline-secondary">Random cocktail</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
