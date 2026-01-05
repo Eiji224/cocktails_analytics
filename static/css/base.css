@@ -26,8 +26,12 @@ footer {
     color: white !important;
 }
 
+.custom-nav {
+    background-color: rgb(51, 0, 0) !important;
+    color: white;
+}
+
 :root {
-  /* Основные цвета из палитры */
   --bs-primary: #073f1c;
   --bs-primary-rgb: 7, 63, 28;
 
@@ -81,7 +85,6 @@ footer {
   --bs-border-color-translucent: rgba(0, 0, 0, 0.175);
 }
 
-/* Современные стили для всех кнопок */
 .btn,
 button.btn,
 [class*="btn-"] {
@@ -269,4 +272,14 @@ button.btn:active,
   color: #fff;
   background: #330000;
   border-color: #330000;
+}
+
+.text-bg-primary {
+  color: #fff !important;
+  background-color: #073f1c !important;
+}
+
+.text-bg-secondary {
+  color: #fff !important;
+  background-color: #36127b !important;
 }

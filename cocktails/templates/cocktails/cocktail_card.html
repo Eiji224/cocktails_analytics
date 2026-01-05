@@ -1,0 +1,10 @@
+<div class="card d-flex flex-column border rounded-3 gap-2 w-25 h-25">
+    <img src="{{ cocktail.image_url }}" alt="{{ cocktail.name }}" class="img-fluid mt-2">
+    <h3 class="text-white">{{ cocktail.name }}</h3>
+    {% if cocktail.is_alcoholic %}
+        <span class="text-bg-primary">Alcoholic</span>
+    {% else %}
+        <span class="text-bg-secondary">Non-alcoholic</span>
+    {% endif %}
+    <button class="btn btn-primary mb-2">View</button>
+</div>

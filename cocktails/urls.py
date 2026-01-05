@@ -3,4 +3,5 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('cocktails/<int:page>', views.browse_cocktails, name='cocktails')
 ]
