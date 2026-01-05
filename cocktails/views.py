@@ -1,24 +1,26 @@
-from django.http import HttpResponse
+from django.core.paginator import Paginator
 from django.shortcuts import render
 
 from .models import Cocktail
-
-def chunked(iterable, size):
-    for i in range(0, len(iterable), size):
-        yield iterable[i:i + size]
 
 def index(request):
     return render(request, 'cocktails/index.html')
 
 def browse_cocktails(request, page: int):
-    page_size = 20
-    columns = 4
+    elements_qty = 20
+    items_per_row = 4
 
-    offset = (page - 1) * page_size
+    cocktails = Cocktail.objects.order_by('id')
+    paginator = Paginator(cocktails, elements_qty)
+    page_obj = paginator.get_page(page)
 
-    cocktails = Cocktail.objects.order_by('id')[offset : offset + page_size]
-    cocktail_rows = chunked(cocktails, columns)
-    context = {
-        'cocktail_rows': cocktail_rows,
-    }
-    return render(request, 'cocktails/cocktails.html', context)
+    def group_into_rows(items, per_row):
+        items = list(items)
+        return [items[i:i + per_row] for i in range(0, len(items), per_row)]
+
+    rows = group_into_rows(page_obj.object_list, items_per_row)
+
+    return render(request, 'cocktails/cocktails.html', {
+        'page_obj': page_obj,
+        'rows': rows,
+    })
