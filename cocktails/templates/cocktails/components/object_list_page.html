@@ -1,0 +1,16 @@
+<div class="text-center py-5">
+        <h1 class="text-white">{{ title }}</h1>
+        <h2 class="text-white">{{ subtitle }}</h2>
+</div>
+
+<div class="container py-2">
+    {% for row in rows %}
+        <div class="row m-3">
+            {% for obj in row %}
+                {% include card_template with object=obj %}
+            {% endfor %}
+        </div>
+    {% endfor %}
+</div>
+
+{% include 'cocktails/components/pagination.html' with page_obj=page_obj url_name=url_name %}

@@ -1,0 +1,32 @@
+<div class="d-flex justify-content-center">
+    {% if page_obj.has_previous %}
+        <a class="btn-primary" href="{% url url_name page=page_obj.previous_page_number %}" disabled>&lt;</a>
+    {% else %}
+        <span class="btn-primary" disabled>&lt;</span>
+    {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+            {% if num >= page_obj.number|add:'-2' and num <= page_obj.number|add:'2' %}
+                {% if num == page_obj.number %}
+                    <button class="btn-primary disabled">{{ num }}</button>
+                {% else %}
+                    <a href="{% url url_name page=num %}" class="btn-primary">{{ num }}</a>
+                {% endif %}
+
+            {% elif num == 1 or num == page_obj.paginator.num_pages %}
+                <a href="{% url url_name page=num %}" class="btn-primary">{{ num }}</a>
+
+            {% elif num == 2 and page_obj.number > 3 %}
+                <button class="btn-primary disabled">...</button>
+
+            {% elif num == page_obj.paginator.num_pages|add:'-1' and page_obj.number < page_obj.paginator.num_pages|add:'-2' %}
+                <button class="btn-primary disabled">...</button>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <button class="btn-primary" href="{% url url_name page=page_obj.next_page_number %}">&gt;</button>
+        {% else %}
+            <button class="btn-primary disabled">&gt;</button>
+        {% endif %}
+</div>
