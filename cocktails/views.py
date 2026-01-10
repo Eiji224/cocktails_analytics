@@ -1,7 +1,7 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render
 
-from .models import Cocktail, Ingredient
+from .models import Cocktail, Ingredient, CocktailIngredient
 
 BROWSE_PAGES_INFO = {
     'items_per_page': 20,
@@ -38,4 +38,18 @@ def browse_ingredients(request, page: int):
     return render(request, 'cocktails/ingredients.html', {
         'page_obj': page_obj,
         'rows': rows,
+    })
+
+def explore_cocktail(request, id: int):
+    cocktail = Cocktail.objects.get(id=id)
+    cocktail_ingredients = CocktailIngredient.objects.filter(cocktail_id=id)
+
+    ingredients = {}
+    for ci in cocktail_ingredients:
+        ingredient = Ingredient.objects.get(id=ci.ingredient_id)
+        ingredients[ingredient] = ci.ingredient_measure
+
+    return render(request, 'cocktails/explore_cocktail.html', {
+        'cocktail': cocktail,
+        'ingredients': list(ingredients.items()),
     })
