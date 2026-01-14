@@ -39,3 +39,18 @@ class CocktailViews(models.Model):
     )
     cocktail = models.ForeignKey(Cocktail, on_delete=models.CASCADE)
     viewed_at = models.DateTimeField(auto_now_add=True)
+
+
+class FavouriteCocktail(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='favourite_cocktails'
+    )
+    cocktail = models.ForeignKey(
+        Cocktail,
+        on_delete=models.CASCADE
+    )
+
+    class Meta:
+        unique_together = ('user', 'cocktail')

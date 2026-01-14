@@ -1,0 +1,26 @@
+{% extends 'registration/base.html' %}
+{% load static %}
+
+{% block title %}Register{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5 w-50 rounded-4 p-3" style="background-color: rgba(51, 0, 0, 0.8);">
+        <div class="d-flex flex-row align-items-center justify-content-center">
+            <a class="navbar-brand text-white" href="{% url 'index' %}">
+                <img src="{% static 'images/icon.svg' %}" alt="Logo" class="me-2" style="height: 1.5rem; width: auto; filter: invert(1);">
+                <h1>Cocktails</h1>
+            </a>
+        </div>
+
+        <h2 class="text-white mb-4">Register</h2>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-primary w-100">Register</button>
+        </form>
+    </div>
+{% endblock %}
