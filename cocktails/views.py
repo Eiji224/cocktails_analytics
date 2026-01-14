@@ -53,3 +53,14 @@ def explore_cocktail(request, id: int):
         'cocktail': cocktail,
         'ingredients': list(ingredients.items()),
     })
+
+def explore_ingredient(request, id: int):
+    ingredient = Ingredient.objects.get(id=id)
+    cocktail_ingredients = CocktailIngredient.objects.filter(ingredient_id=id)
+
+    cocktails = [Cocktail.objects.get(id=ci.cocktail_id) for ci in cocktail_ingredients]
+
+    return render(request, 'cocktails/explore_ingredient.html', {
+        'ingredient': ingredient,
+        'cocktails': cocktails,
+    })
