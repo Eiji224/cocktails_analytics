@@ -1,7 +1,8 @@
 from django.core.paginator import Paginator
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 
-from .models import Cocktail, Ingredient, CocktailIngredient
+from .models import Cocktail, Ingredient, CocktailIngredient, FavouriteCocktail
 
 BROWSE_PAGES_INFO = {
     'items_per_page': 20,
@@ -64,3 +65,17 @@ def explore_ingredient(request, id: int):
         'ingredient': ingredient,
         'cocktails': cocktails,
     })
+
+@login_required
+def toggle_favourite(request, cocktail_id: int):
+    cocktail = get_object_or_404(Cocktail, id=cocktail_id)
+
+    favourite, created = FavouriteCocktail.objects.get_or_create(
+        user=request.user,
+        cocktail=cocktail,
+    )
+
+    if not created:
+        favourite.delete()
+
+    return redirect(request.META.get('HTTP_REFERER', '/'))
