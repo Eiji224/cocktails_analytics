@@ -30,17 +30,6 @@ class CocktailIngredient(models.Model):
         unique_together = ('cocktail', 'ingredient')
 
 
-class CocktailViews(models.Model):
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        blank=True,
-        null=True,
-        on_delete=models.SET_NULL
-    )
-    cocktail = models.ForeignKey(Cocktail, on_delete=models.CASCADE)
-    viewed_at = models.DateTimeField(auto_now_add=True)
-
-
 class FavouriteCocktail(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,

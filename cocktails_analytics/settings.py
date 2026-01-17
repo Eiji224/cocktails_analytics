@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cocktails.apps.CocktailsConfig',
-    'users.apps.UsersConfig'
+    'users.apps.UsersConfig',
+    'analytics.apps.AnalyticsConfig'
 ]
 
 MIDDLEWARE = [
@@ -54,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'analytics.middleware.CocktailViewMiddleware'
 ]
 
 ROOT_URLCONF = 'cocktails_analytics.urls'
