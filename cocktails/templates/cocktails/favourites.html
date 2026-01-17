@@ -1,0 +1,12 @@
+{% extends 'cocktails/base.html' %}
+{% load static %}
+
+{% block title %}Cocktails - Recipes{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static '/css/pages.css' %}">
+{% endblock %}
+
+{% block content %}
+    {% include 'cocktails/components/object_list_page.html' with title="Favourite Cocktails" subtitle="Here are your favourite cocktails" rows=rows page_obj=page_obj url_name='favourites' card_template='cocktails/components/cocktail_card.html' %}
+{% endblock %}

@@ -7,10 +7,6 @@
     <link rel="stylesheet" href="{% static '/css/pages.css' %}">
 {% endblock %}
 
-{% block navbar %}
-    {% include 'cocktails/components/navbar.html' %}
-{% endblock %}
-
 {% block content %}
     {% include 'cocktails/components/object_list_page.html' with title="Browse Cocktails" subtitle="Explore recipes and cocktail information" rows=rows page_obj=page_obj url_name='cocktails' card_template='cocktails/components/cocktail_card.html' %}
 {% endblock %}

@@ -79,3 +79,18 @@ def toggle_favourite(request, cocktail_id: int):
         favourite.delete()
 
     return redirect(request.META.get('HTTP_REFERER', '/'))
+
+@login_required
+def checkout_favourites(request, page:int):
+    favourites = FavouriteCocktail.objects.filter(user=request.user)
+
+    cocktails = [fav.cocktail for fav in favourites]
+
+    paginator = Paginator(cocktails, BROWSE_PAGES_INFO.get('items_per_row'))
+    page_obj = paginator.get_page(page)
+    rows = group_into_rows(page_obj.object_list, BROWSE_PAGES_INFO.get('items_per_row'))
+
+    return render(request, 'cocktails/favourites.html', {
+        'page_obj': page_obj,
+        'rows': rows,
+    })

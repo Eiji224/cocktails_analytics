@@ -20,7 +20,7 @@
             <div class="collapse navbar-collapse align-items-end" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     {% if user.is_authenticated %}
-                        <a class="nav-link text-white" href="#">Favourite Cocktails</a>
+                        <a class="nav-link text-white" href="{% url 'favourites' page=1 %}">Favourite Cocktails</a>
                         <form method="post" action="{% url 'logout' %}">
                             {% csrf_token %}
                             <button class="nav-link text-danger" type="submit">Logout</button>

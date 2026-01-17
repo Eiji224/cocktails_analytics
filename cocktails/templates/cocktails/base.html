@@ -15,15 +15,17 @@
 
     {% block styles %}{% endblock %}
 </head>
-<body>
-    {% block navbar %}{% endblock %}
-    <section>{% block content %}{% endblock %}</section>
+<body class="d-flex flex-column min-vh-100">
+    {% include 'cocktails/components/navbar.html' %}
+
+    <section class="flex-grow-1">{% block content %}{% endblock %}</section>
+
     <footer class="py-4 mt-auto">
       <div class="container text-center text-muted text-white-50">
         <p class="mb-1">Cocktails - Explore recipes, alcohol levels and popularity</p>
         <p class="mb-0">
           © 2026 Andrey ·
-          <a href="https://github.com/andrey/cocktails_analytics" class="text-decoration-none text-muted text-white-50">GitHub</a>
+          <a href="https://github.com/Eiji224/cocktails_analytics" class="text-decoration-none text-muted text-white-50">GitHub</a>
         </p>
       </div>
     </footer>
