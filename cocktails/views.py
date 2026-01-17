@@ -50,9 +50,14 @@ def explore_cocktail(request, id: int):
         ingredient = Ingredient.objects.get(id=ci.ingredient_id)
         ingredients[ingredient] = ci.ingredient_measure
 
+    is_favourite = False
+    if request.user.is_authenticated:
+        is_favourite = FavouriteCocktail.objects.filter(user=request.user, cocktail=cocktail).exists()
+
     return render(request, 'cocktails/explore_cocktail.html', {
         'cocktail': cocktail,
         'ingredients': list(ingredients.items()),
+        'is_favourite': is_favourite,
     })
 
 def explore_ingredient(request, id: int):

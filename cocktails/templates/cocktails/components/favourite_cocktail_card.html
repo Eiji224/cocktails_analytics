@@ -1,0 +1,13 @@
+<div class="card d-flex flex-column border rounded-3 gap-2 w-25 h-25">
+    <img src="{{ object.image_url }}" alt="{{ object.name }}" class="img-fluid mt-2">
+    <h3 class="text-white">{{ object.name }}</h3>
+    {% if object.is_alcoholic %}
+        <span class="text-bg-primary">Alcoholic</span>
+    {% else %}
+        <span class="text-bg-secondary">Non-alcoholic</span>
+    {% endif %}
+    <div class="d-flex mb-2">
+        <a class="btn btn-primary flex-grow-1" href="{% url 'explore_cocktail' id=object.id %}">View</a>
+        <a class="btn btn-danger ms-2" href="{% url 'toggle_favourite' cocktail_id=object.id %}">X</a>
+    </div>
+</div>

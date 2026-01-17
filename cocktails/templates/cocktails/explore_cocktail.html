@@ -38,7 +38,11 @@
                         {% if user.is_authenticated %}
                             <form method="post" action="{% url 'toggle_favourite' cocktail.id %}">
                                 {% csrf_token %}
-                                <button type="submit" class="btn btn-primary">Add to favourites</button>
+                                {% if is_favourite %}
+                                    <button type="submit" class="btn btn-danger">Delete from favourites</button>
+                                {% else %}
+                                    <button type="submit" class="btn btn-primary">Add to favourites</button>
+                                {% endif %}
                             </form>
                         {% else %}
                             <a class="btn btn-primary" href="{% url 'login' %}">Auth to add to favourites</a>
