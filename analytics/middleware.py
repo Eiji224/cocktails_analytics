@@ -1,4 +1,5 @@
-from cocktails.models import Cocktail, CocktailViews
+from cocktails.models import Cocktail
+from analytics.models import CocktailViews
 
 class CocktailViewMiddleware:
     def __init__(self, get_response):
