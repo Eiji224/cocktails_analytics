@@ -2,9 +2,12 @@ services:
   app:
     build: .
     container_name: django_app
+    depends_on:
+      db:
+        condition: service_healthy
+    command: gunicorn cocktails_analytics.wsgi:application --bind 0.0.0.0:8000
     volumes:
-      - ./data:/app/data
-      - ./static:/app/staticfiles # статика
+      - ./static:/app/staticfiles
     environment:
       - DEBUG=0
       - DATABASE_URL=sqlite:///data/db.sqlite3
@@ -13,6 +16,23 @@ services:
     restart: unless-stopped
     networks:
       - django
+
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 10
 
   nginx:
     image: nginx:alpine
