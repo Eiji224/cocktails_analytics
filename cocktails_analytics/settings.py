@@ -28,7 +28,7 @@ if env_path.exists():
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')
 
@@ -60,6 +60,10 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'cocktails_analytics.urls'
 
+CSRF_TRUSTED_ORIGINS = [
+    f'https://{os.getenv('DOMAIN')}'
+]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -90,6 +94,11 @@ DATABASES = {
         'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': os.getenv('DB_HOST'),
         'PORT': os.getenv('DB_PORT'),
+        "OPTIONS": {
+            "use_pure": False,
+            "autocommit": True,
+            "raise_on_warnings": True,
+        }
     }
 }
 

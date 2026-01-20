@@ -5,17 +5,14 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    command: gunicorn cocktails_analytics.wsgi:application --bind 0.0.0.0:8000
+    command: sh -c "sleep 5 && gunicorn cocktails_analytics.wsgi:application --bind 0.0.0.0:8000"
     volumes:
       - ./static:/app/staticfiles
-    environment:
-      - DEBUG=0
-      - DATABASE_URL=sqlite:///data/db.sqlite3
+    env_file:
+      - .env
     expose:
       - "8000"
     restart: unless-stopped
-    networks:
-      - django
 
   db:
     image: mysql:8.0
@@ -40,15 +37,14 @@ services:
       - "80:80"
       - "443:443"
     volumes:
+      - ./static:/app/staticfiles:ro
       - ./nginx/conf:/etc/nginx/conf.d
       - ./nginx/certs:/etc/letsencrypt
       - certbot-www:/var/www/certbot
     depends_on:
       app:
-        condition: service_healthy
+        condition: service_started
     restart: unless-stopped
-    networks:
-      - django
 
   certbot:
     image: certbot/certbot
@@ -70,12 +66,7 @@ services:
       - --non-interactive
       - -d
       - ${DOMAIN}
-    networks:
-      - django
 
 volumes:
   certbot-www:
-
-networks:
-  django:
-    driver: bridge
+  mysql_data:
