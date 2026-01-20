@@ -1,3 +1,5 @@
+
+
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
@@ -42,7 +44,6 @@ def browse_ingredients(request, page: int):
     })
 
 def explore_cocktail(request, id: int):
-    cocktail = Cocktail.objects.get(id=id)
     cocktail_ingredients = CocktailIngredient.objects.filter(cocktail_id=id)
 
     ingredients = {}
@@ -52,10 +53,10 @@ def explore_cocktail(request, id: int):
 
     is_favourite = False
     if request.user.is_authenticated:
-        is_favourite = FavouriteCocktail.objects.filter(user=request.user, cocktail=cocktail).exists()
+        is_favourite = FavouriteCocktail.objects.filter(user=request.user, cocktail=request.cocktail).exists()
 
     return render(request, 'cocktails/explore_cocktail.html', {
-        'cocktail': cocktail,
+        'cocktail': request.cocktail,
         'ingredients': list(ingredients.items()),
         'is_favourite': is_favourite,
     })

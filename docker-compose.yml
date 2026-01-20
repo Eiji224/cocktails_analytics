@@ -2,17 +2,34 @@ services:
   app:
     build: .
     container_name: django_app
+    depends_on:
+      db:
+        condition: service_healthy
+    command: sh -c "sleep 5 && gunicorn cocktails_analytics.wsgi:application --bind 0.0.0.0:8000"
     volumes:
-      - ./data:/app/data
-      - ./static:/app/staticfiles # статика
-    environment:
-      - DEBUG=0
-      - DATABASE_URL=sqlite:///data/db.sqlite3
+      - ./static:/app/staticfiles
+    env_file:
+      - .env
     expose:
       - "8000"
     restart: unless-stopped
-    networks:
-      - django
+
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 10
 
   nginx:
     image: nginx:alpine
@@ -20,15 +37,14 @@ services:
       - "80:80"
       - "443:443"
     volumes:
+      - ./static:/app/staticfiles:ro
       - ./nginx/conf:/etc/nginx/conf.d
       - ./nginx/certs:/etc/letsencrypt
       - certbot-www:/var/www/certbot
     depends_on:
       app:
-        condition: service_healthy
+        condition: service_started
     restart: unless-stopped
-    networks:
-      - django
 
   certbot:
     image: certbot/certbot
@@ -50,12 +66,7 @@ services:
       - --non-interactive
       - -d
       - ${DOMAIN}
-    networks:
-      - django
 
 volumes:
   certbot-www:
-
-networks:
-  django:
-    driver: bridge
+  mysql_data:

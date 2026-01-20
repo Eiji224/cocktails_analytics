@@ -28,7 +28,7 @@ if env_path.exists():
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')
 
@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cocktails.apps.CocktailsConfig',
-    'users.apps.UsersConfig'
+    'users.apps.UsersConfig',
+    'analytics.apps.AnalyticsConfig'
 ]
 
 MIDDLEWARE = [
@@ -54,9 +55,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'analytics.middleware.CocktailViewMiddleware'
 ]
 
 ROOT_URLCONF = 'cocktails_analytics.urls'
+
+CSRF_TRUSTED_ORIGINS = [
+    f'https://{os.getenv('DOMAIN')}'
+]
 
 TEMPLATES = [
     {
@@ -82,8 +88,17 @@ WSGI_APPLICATION = 'cocktails_analytics.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'mysql.connector.django',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
+        "OPTIONS": {
+            "use_pure": False,
+            "autocommit": True,
+            "raise_on_warnings": True,
+        }
     }
 }
 
